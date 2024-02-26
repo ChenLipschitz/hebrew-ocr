@@ -3,7 +3,7 @@ import pytesseract
 import os
 
 # Read the input image
-image = cv2.imread('images.png')
+image = cv2.imread('text.jpg')
 
 # Convert the image to grayscale
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
