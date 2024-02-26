@@ -3,7 +3,7 @@ import pytesseract
 import os
 
 # Read the input image
-image = cv2.imread('text.jpg')
+image = cv2.imread('images.png')
 
 # Convert the image to grayscale
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -22,8 +22,9 @@ if not os.path.exists(output_folder):
 # Initialize a counter for words
 word_counter = 0
 
+
 # Iterate over each word bounding box
-for i, word_text in enumerate(data['text']):
+for i, word_text in reversed(list(enumerate(data['text']))):
     # Filter out non-word regions (ignore empty strings)
     if word_text.strip():
         x, y, w, h = data['left'][i], data['top'][i], data['width'][i], data['height'][i]
