@@ -22,6 +22,8 @@ if not os.path.exists(output_folder):
 # Initialize a counter for words
 word_counter = 0
 
+# Define the expansion factor for the bounding box (in pixels)
+expansion_factor = 12  # Adjust this value as needed
 
 # Iterate over each word bounding box
 for i, word_text in reversed(list(enumerate(data['text']))):
@@ -29,14 +31,26 @@ for i, word_text in reversed(list(enumerate(data['text']))):
     if word_text.strip():
         x, y, w, h = data['left'][i], data['top'][i], data['width'][i], data['height'][i]
         
-        # Crop the region corresponding to the word
+        # Expand the bounding box coordinates
+        x -= expansion_factor
+        y -= expansion_factor
+        w += 2 * expansion_factor
+        h += 2 * expansion_factor
+        
+        # Ensure the coordinates are within the image boundaries
+        x = max(0, x)
+        y = max(0, y)
+        w = min(w, image.shape[1] - x)
+        h = min(h, image.shape[0] - y)
+        
+        # Crop the region corresponding to the expanded bounding box
         word_image = image[y:y+h, x:x+w]
         
         # Save the word image into the folder
         cv2.imwrite(os.path.join(output_folder, f'word_{word_counter}.jpg'), word_image)
 
-        # Print the text of each word along with its bounding box coordinates
-        print(f"Word {word_counter}: {word_text}, Bounding Box: (x={x}, y={y}, w={w}, h={h})")
+        # Print the text of each word along with its expanded bounding box coordinates
+        print(f"Word {word_counter}: {word_text}, Expanded Bounding Box: (x={x}, y={y}, w={w}, h={h})")
         
         # Increment the word counter
         word_counter += 1
