@@ -6,7 +6,9 @@ from fastapi.openapi.docs import get_swagger_ui_html
 from Split_Img import perform_ocr
 import cv2
 import numpy as np
+import requests
 from PIL import Image
+import pytesseract
 import io
 
 app = FastAPI()
@@ -20,16 +22,26 @@ def read_image(file) -> np.ndarray:
 
 router = APIRouter()
 
-@router.post("/upload/")
-async def upload_image(file: UploadFile = File(...)):
+@app.post("/upload/")
+async def upload_image(file: UploadFile = File(...), type: str = "text") -> str:
     try:
         file_path = f"uploads/{file.filename}"
         print(file_path)
         with open(file_path, "wb") as buffer:
             buffer.write(await file.read())
-
+        
         perform_ocr(file_path)
+        
+        print(file_path)
+        if type == "text":
+            res = pytesseract.image_to_string(Image.open(file_path), lang="heb")
+        else:
+            res = requests.get('http://localhost:8010/predict_sentnece').json()
 
+        return res
+    
+
+    
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
