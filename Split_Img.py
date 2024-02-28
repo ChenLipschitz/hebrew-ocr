@@ -47,9 +47,11 @@ def perform_ocr(image_path: str) -> None:
             
             # Crop the region corresponding to the expanded bounding box
             word_image = image[y:y+h, x:x+w]
+
+            resized_word_image = cv2.resize(word_image, (128, 32))
             
             # Save the word image into the folder
-            cv2.imwrite(os.path.join(output_folder, f'word_{word_counter}.jpg'), word_image)
+            cv2.imwrite(os.path.join(output_folder, f'word_{word_counter}.jpg'), resized_word_image)
 
             # Print the text of each word along with its expanded bounding box coordinates
             print(f"Word {word_counter}: {word_text}, Expanded Bounding Box: (x={x}, y={y}, w={w}, h={h})")

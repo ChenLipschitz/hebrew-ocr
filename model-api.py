@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from subprocess import check_output
-from predict_words import predict_words
+from predict_words import perform_ocr
 from typing import Optional
 
 app = FastAPI()
@@ -10,7 +10,7 @@ app = FastAPI()
 async def run_script() -> str:
     try:
         # Run the provided script using check_output
-        return predict_words()
+        return perform_ocr()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
