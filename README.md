@@ -118,11 +118,5 @@ Result:
   - Numpy 16.4
   - OpenCV
     
-## References
-[1] [Harald Scheid's SimpleHTR model](https://towardsdatascience.com/build-a-handwritten-text-recognition-system-using-tensorflow-2326a3487cd5)\
-[2] [Harald Scheid's CTC-WordBeam algorithm](https://towardsdatascience.com/word-beam-search-a-ctc-decoding-algorithm-b051d28f3d2e)\
-[3] [The MILA Hebrew Lexicon](http://www.mila.cs.technion.ac.il/resources_lexicons_stopwords.html)\
-[4] [MILA's Arutz 7 corpus](http://www.mila.cs.technion.ac.il/eng/resources_corpora_arutz7.html)\
-[5] [MILA's TheMarker corpus](http://www.mila.cs.technion.ac.il/eng/resources_corpora_themarker.html)\
-[6] [MILA's HaKnesset corpus](http://www.mila.cs.technion.ac.il/eng/resources_corpora_haknesset.html)
+## Bibliography
 
