@@ -27,9 +27,9 @@ def perform_ocr():
     words = new_word.split(" ")
     hebrew_word = " ".join(get_display(x) for x in words)
 
-    # Delete all crated images
-    shutil.rmtree(folder_path)
-    os.makedirs(folder_path, exist_ok=True)
+    # # Delete all crated images
+    # shutil.rmtree(folder_path)
+    # os.makedirs(folder_path, exist_ok=True)
 
 
     return hebrew_word
